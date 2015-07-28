@@ -12,5 +12,17 @@ class Home extends Controller {
     public function index() {
         
     }
+    
+    public function about() {
+        
+    }
+    
+    public function work() {
+        
+    }
+    
+    public function team() {
+        
+    }
 
 }
