@@ -1,45 +1,98 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="SwiftMVC Framework">
-    <meta name="author" content="Faizan Ayubi">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+        <meta name="theme-color" content="#2196F3">
+        <title>SwiftDeal Online LLP</title>
 
-    <title>SwiftMVC Framework</title>
+        <!-- CSS  -->
+        <link href="{echo CDN}css/materialize.css" type="text/css" rel="stylesheet">
+        <link href="{echo CDN}css/style.css" type="text/css" rel="stylesheet" >
+        <link href="{echo CDN}css/font-awesome.min.css" type="text/css" rel="stylesheet" >
+        <script src="{echo CDN}js/modernizr.js"></script> <!-- Modernizr -->
+    </head>
+    <body id="top" class="scrollspy">
 
-    <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <!-- Pre Loader -->
+        <div id="loader-wrapper">
+            <div id="loader"></div>
 
-    <!-- Custom CSS -->
-    <style>
-    body {
-        padding-top: 70px;
-        /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
-    }
-    </style>
+            <div class="loader-section section-left"></div>
+            <div class="loader-section section-right"></div>
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+        </div>
 
-</head>
+        {include layouts/navigation.html}
+        {ayield action}
 
-<body>
 
-    {include navigation.html}
-    {ayield action}
+        <!--Footer-->
+        <footer id="contact" class="page-footer default_color scrollspy">
+            <div class="container">  
+                <div class="row">
+                    <div class="col l6 s12">
+                        <form class="col s12">
+                            <div class="row">
+                                <div class="input-field col s6">
+                                    <i class="mdi-action-account-circle prefix white-text"></i>
+                                    <input id="icon_prefix" type="text" class="validate white-text">
+                                    <label for="icon_prefix" class="white-text">First Name</label>
+                                </div>
+                                <div class="input-field col s6">
+                                    <i class="mdi-communication-email prefix white-text"></i>
+                                    <input id="icon_email" type="email" class="validate white-text">
+                                    <label for="icon_email" class="white-text">Email-id</label>
+                                </div>
+                                <div class="input-field col s12">
+                                    <i class="mdi-editor-mode-edit prefix white-text"></i>
+                                    <textarea id="icon_prefix2" class="materialize-textarea white-text"></textarea>
+                                    <label for="icon_prefix2" class="white-text">Message</label>
+                                </div>
+                                <div class="col offset-s7 s5">
+                                    <button class="btn waves-effect waves-light red darken-1" type="submit" name="action">Submit
+                                        <i class="mdi-content-send right white-text"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col l3 s12">
+                        <h5 class="white-text">SwiftDeal</h5>
+                        <ul>
+                            <li><a class="white-text" href="http://www.swiftdeal.org/">Home</a></li>
+                            <li><a class="white-text" href="http://www.swiftdeal.org//blog">Blog</a></li>
+                        </ul>
+                    </div>
+                    <div class="col l3 s12">
+                        <h5 class="white-text">Social</h5>
+                        <ul>
+                            <li>
+                                <a class="white-text" href="https://github.com/swiftdeal">
+                                    <i class="small fa fa-github-square white-text"></i> Github
+                                </a>
+                            </li>
+                            <li>
+                                <a class="white-text" href="https://www.linkedin.com/company/swiftdeal">
+                                    <i class="small fa fa-linkedin-square white-text"></i> Linkedin
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-copyright default_color">
+                <div class="container">
+                    &COPY; SwiftDeal Online LLP
+                </div>
+            </div>
+        </footer>
 
-    <!-- jQuery Version 1.11.1 -->
-    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 
-    <!-- Bootstrap Core JavaScript -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <!--  Scripts-->
+        <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="{echo CDN}js/materialize.js"></script>
+        <script src="{echo CDN}js/init.js"></script>
 
-</body>
-
+    </body>
 </html>
