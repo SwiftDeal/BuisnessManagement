@@ -4,13 +4,36 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
         <meta name="theme-color" content="#2196F3">
-        <title>SwiftDeal Online LLP</title>
+
+        <meta name="description" content="{echo strip_tags($seo->getDescription())}" />
+        <meta name="keywords" content="{echo strip_tags($seo->getKeywords())}">
+        <meta name="copyright" content="SWIFTDEAL ONLINE LLP 2015">
+        <meta name="Robots" content="{echo $seo->getRobots()}">
+        <meta name="Revisit-after" content="1 Day">
+        <link rel="shortcut icon" href="{echo CDN}img/favicon.ico" type="image/x-icon">
+        <link rel="icon" type="image/x-icon" href="{echo CDN}img/favicon.ico" />
+
+        <title>{echo $seo->getTitle()}</title>
 
         <!-- CSS  -->
         <link href="{echo CDN}css/materialize.css" type="text/css" rel="stylesheet">
         <link href="{echo CDN}css/style.css" type="text/css" rel="stylesheet" >
         <link href="{echo CDN}css/font-awesome.min.css" type="text/css" rel="stylesheet" >
         <script src="{echo CDN}js/modernizr.js"></script> <!-- Modernizr -->
+
+        <!-- facebook -->
+        <meta property="og:title" content="{echo $seo->getTitle()}"/>
+        <meta property="og:type" content="article"/>
+        <meta property="og:image" content="{echo $seo->getPhoto()}"/>
+        <meta property="og:url" content="{echo URL}"/>
+        <meta property="og:description" content="{echo strip_tags($seo->getDescription())}"/>
+
+        <!-- twitter -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:url" content="{echo URL}">
+        <meta name="twitter:title" content="{echo $seo->getTitle()}">
+        <meta name="twitter:description" content="{echo strip_tags($seo->getDescription())}">
+        <meta name="twitter:image" content="{echo $seo->getPhoto()}">
     </head>
     <body id="top" class="scrollspy">
 
