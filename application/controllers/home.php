@@ -24,5 +24,9 @@ class Home extends Controller {
     public function team() {
         
     }
+    
+    public function contact() {
+        
+    }
 
 }
