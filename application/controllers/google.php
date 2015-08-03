@@ -9,6 +9,8 @@ use Shared\Controller as Controller;
 use Framework\Registry as Registry;
 
 class Google extends Controller {
+    
+    private $calendarId = 'hgjojsbcomh187bh6tiead5doc@group.calendar.google.com';
 
     private function configuration() {
         $configuration = Registry::get("configuration");
@@ -26,7 +28,7 @@ class Google extends Controller {
         $client = new Google_Client();
         $client->setApplicationName($parsed->api->google->application);
         $client->setScopes(implode(' ', array(
-            Google_Service_Calendar::CALENDAR_READONLY
+            Google_Service_Calendar::CALENDAR
         )));
         $client->setAuthConfigFile($parsed->api->google->secretfile);
         $client->setAccessType('offline');
@@ -75,21 +77,19 @@ class Google extends Controller {
         return str_replace('~', realpath($homeDirectory), $path);
     }
 
-    public function initialize() {
+    public function listEvents() {
         $this->noview();
         // Get the API client and construct the service object.
-        $client = $this->getClient();
-        $service = new Google_Service_Calendar($client);
+        $service = new Google_Service_Calendar($this->getClient());
 
         // Print the next 10 events on the user's calendar.
-        $calendarId = 'primary';
         $optParams = array(
             'maxResults' => 10,
             'orderBy' => 'startTime',
             'singleEvents' => TRUE,
             'timeMin' => date('c'),
         );
-        $results = $service->events->listEvents($calendarId, $optParams);
+        $results = $service->events->listEvents($this->calendarId, $optParams);
 
         if (count($results->getItems()) == 0) {
             print "No upcoming events found.\n";
@@ -103,6 +103,41 @@ class Google extends Controller {
                 printf("%s (%s)\n", $event->getSummary(), $start);
             }
         }
+    }
+
+    public function createEvents($options) {
+        $now = strftime("%Y-%m-%d", strtotime('now'));
+        $service = new Google_Service_Calendar($this->getClient());
+        
+        $event = new Google_Service_Calendar_Event(array(
+            'summary' => $options["summary"],
+            'location' => $options["location"],
+            'description' => $options["description"],
+            'start' => array(
+                'dateTime' => '2015-05-28T09:00:00-07:00',
+                'timeZone' => 'Asia/Kolkata',
+            ),
+            'end' => array(
+                'dateTime' => '2015-05-28T17:00:00-07:00',
+                'timeZone' => 'Asia/Kolkata',
+            ),
+            'recurrence' => array(
+                'RRULE:FREQ=DAILY;COUNT=2'
+            ),
+            'attendees' => array(
+                array('email' => 'lpage@example.com'),
+                array('email' => 'sbrin@example.com'),
+            ),
+            'reminders' => array(
+                'useDefault' => FALSE,
+                'overrides' => array(
+                    array('method' => 'email', 'minutes' => 24 * 60),
+                    array('method' => 'popup', 'minutes' => 10),
+                ),
+            ),
+        ));
+
+        return $service->events->insert($this->calendarId, $event);
     }
 
 }
