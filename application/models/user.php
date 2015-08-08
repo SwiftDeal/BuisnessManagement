@@ -34,6 +34,7 @@ class User extends Shared\Model {
      * @readwrite
      * @type text
      * @length 100
+     * @unique
      * @index
      * 
      * @validate required, max(100)
