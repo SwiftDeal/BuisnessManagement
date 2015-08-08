@@ -35,6 +35,6 @@ class File extends Shared\Model {
      * @readwrite
      * @type integer
      */
-    protected $_user;
+    protected $_user_id;
 
 }
