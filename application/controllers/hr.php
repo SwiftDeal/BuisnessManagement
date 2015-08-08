@@ -7,7 +7,17 @@
  */
 class HR extends Admin {
     
+    /**
+     * @before _secure, changeLayout
+     */
     public function attendance() {
+        
+    }
+    
+    /**
+     * @before _secure, changeLayout
+     */
+    public function team() {
         
     }
 }
