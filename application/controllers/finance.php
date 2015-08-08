@@ -6,5 +6,22 @@
  * @author Faizan Ayubi
  */
 class Finance extends Admin {
-    //put your code here
+    
+    /**
+     * Shows all project expenses
+     * 
+     * @before _secure, changeLayout
+     */
+    public function index() {
+        
+    }
+    
+    /**
+     * Show session wise project expenses
+     * 
+     * @before _secure, changeLayout
+     */
+    public function expenses() {
+        
+    }
 }

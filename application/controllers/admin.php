@@ -9,7 +9,15 @@ use Shared\Controller as Controller;
 use Framework\RequestMethods as RequestMethods;
 
 class Admin extends Controller {
-
+    
+    /**
+     * @readwrite
+     */
+    protected $_member;
+    
+    /**
+     * @before _secure, changeLayout
+     */
     public function index() {
         $this->seo(array("title" => "Dashboard", "view" => $this->getLayoutView()));
         $view = $this->getActionView();
@@ -35,7 +43,10 @@ class Admin extends Controller {
             ));
             if ($user) {
                 $members = Member::all(array("user_id = ?" => $user->id));
-                $this->session($user, $members);
+                foreach ($members as $member) {
+                    $projects[] = Project::first(array("id = ?" => $member->project_id));
+                }
+                $this->session($user, $projects);
                 self::redirect("/admin");
             } else {
                 $view->set("message", "User not exist or blocked");
@@ -43,9 +54,13 @@ class Admin extends Controller {
         }
     }
 
-    protected function session($user, $members) {
+    protected function session($user, $projects) {
         $this->setUser($user);
-        Registry::get("session")->set("members", $members);
+        Registry::get("session")->set("projects", $projects);
+        Registry::get("session")->set("member", Member::first(array(
+            "project_id = ?" => $projects[0]->id, 
+            "user_id" => $this->user->id
+        )));
     }
 
     public function register() {
@@ -70,6 +85,37 @@ class Admin extends Controller {
                 $view->set("message", 'Account exists, login from <a href="/admin/login">here</a>');
             }
         }
+    }
+    
+    protected function switchProject($project_id) {
+        $session = Registry::get("session");
+        $projects = $session->get("projects");
+
+        foreach ($projects as $project) {
+            if ($project_id == $project->id) {
+                $session->set("member", Member::first(array(
+                    "project_id = ?" => $project->id, 
+                    "user_id" => $this->user->id
+                )));
+                self::redirect("/admin");
+            }
+        }
+    }
+    
+    public function changeLayout() {
+        $this->defaultLayout = "layouts/admin";
+        $this->setLayout();
+
+        $session = Registry::get("session");
+        $projects = $session->get("projects");
+        $member = $session->get("member");
+
+        $this->_member = $member;
+
+        $this->getActionView()->set("projects", $projects);
+        $this->getLayoutView()->set("projects", $projects);
+        $this->getActionView()->set("member", $member);
+        $this->getLayoutView()->set("member", $member);
     }
 
 }
