@@ -52,4 +52,13 @@ class User extends Shared\Model {
      * @label password
      */
     protected $_password;
+
+    /**
+     * @column
+     * @readwrite
+     * @type boolean
+     * @index
+     */
+    protected $_validity;
+
 }
