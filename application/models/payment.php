@@ -12,7 +12,14 @@ class Payment extends Shared\Model {
      * @readwrite
      * @type integer
      */
-    protected $_user;
+    protected $_user_id;
+    
+    /**
+     * @column
+     * @readwrite
+     * @type integer
+     */
+    protected $_project_id;
     
     /**
      * @column

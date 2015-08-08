@@ -17,6 +17,11 @@ class Admin extends Controller {
     protected $_member;
     
     /**
+     * @readwrite
+     */
+    protected $_project;
+    
+    /**
      * @before _secure, changeLayout
      */
     public function index() {
@@ -182,6 +187,7 @@ class Admin extends Controller {
     protected function session($user, $projects) {
         $this->setUser($user);
         Registry::get("session")->set("projects", $projects);
+        Registry::get("session")->set("project", $projects[0]);
         Registry::get("session")->set("member", Member::first(array(
             "project_id = ?" => $projects[0]->id, 
             "user_id" => $this->user->id
@@ -219,7 +225,8 @@ class Admin extends Controller {
         }
     }
     
-    protected function switchProject($project_id) {
+    public function switchProject($project_id) {
+        $this->noview();
         $session = Registry::get("session");
         $projects = $session->get("projects");
 
@@ -229,9 +236,15 @@ class Admin extends Controller {
                     "project_id = ?" => $project->id, 
                     "user_id" => $this->user->id
                 )));
+                
+                $session->set("project", Project::first(array(
+                    "id = ?" => $project->id
+                )));
                 self::redirect("/admin");
             }
         }
+        
+        echo 'You are not assigned that project';
     }
     
     public function changeLayout() {
@@ -240,12 +253,16 @@ class Admin extends Controller {
 
         $session = Registry::get("session");
         $projects = $session->get("projects");
+        $project = $session->get("project");
         $member = $session->get("member");
 
         $this->_member = $member;
+        $this->_project = $project;
 
         $this->getActionView()->set("projects", $projects);
         $this->getLayoutView()->set("projects", $projects);
+        $this->getActionView()->set("project", $project);
+        $this->getLayoutView()->set("project", $project);
         $this->getActionView()->set("member", $member);
         $this->getLayoutView()->set("member", $member);
     }

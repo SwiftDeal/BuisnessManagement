@@ -1,0 +1,48 @@
+<div id="page-wrapper">
+    <div class="row col-lg-12">
+        <h1 class="page-header text-center">Expenses<small>({$project->name})</small></h1>
+        <b>{$message}</b>
+        <form class="form-inline text-center" role="form" method="post" action="">
+            <div class="form-group">
+                <div class="input-group">
+                    <label class="sr-only">Amount</label>
+                    <input type="text" style="width: 50px" name="amount" class="form-control" placeholder="Rs" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <label class="sr-only">Comment</label>
+                    <input type="text" style="width: 300px" name="comment" class="form-control" placeholder="comment" />
+                </div>
+            </div>
+            <input type="hidden" name="action" value="expenses">
+            <button type="submit" class="btn btn-primary">Add</button>
+        </form>
+        <hr>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-money fa-fw"></i> Expenses
+            </div>
+            <table class="table table-hover table-striped">
+                <thead>
+                    <th>Id</th>
+                    <th>User</th>
+                    <th>Amount</th>
+                    <th>Created</th>
+                </thead>
+                <tbody id="results">
+                    {foreach $payment in $payments}
+                    {script $user = User::first(array("id = ?" => $payment->user_id), array("id", "name"))}
+                    <tr>
+                        <td>{echo $payment->id}</td>
+                        <td><a href="/admin/info/user/{$user->id}" target="_blank">{echo $user->name}</a></td>
+                        <td>{echo $payment->amount}</td>
+                        <td>{echo $payment->created}</td>
+                    </tr>
+                    {/foreach}
+                </tbody>
+            </table>
+            <div id="after_results" class="text-center"></div>
+        </div>
+    </div>
+</div>
