@@ -5,7 +5,7 @@
  *
  * @author Faizan Ayubi
  */
-class Payment extends Shared\Model {
+class Finance extends Shared\Model {
     
     /**
      * @column
