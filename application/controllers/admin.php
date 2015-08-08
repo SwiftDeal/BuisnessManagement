@@ -7,6 +7,7 @@
  */
 use Shared\Controller as Controller;
 use Framework\RequestMethods as RequestMethods;
+use Framework\Registry as Registry;
 
 class Admin extends Controller {
     
@@ -80,6 +81,13 @@ class Admin extends Controller {
                     "validity" => FALSE
                 ));
                 $user->save();
+                
+                $member = new Member(array(
+                    "user_id" => $user->id,
+                    "designation" => "member",
+                    "project_id" => "1"
+                ));
+                $member->save();
                 $view->set("message", "Your account has been created contact HR to activate");
             } else {
                 $view->set("message", 'Account exists, login from <a href="/admin/login">here</a>');

@@ -18,9 +18,12 @@
                 <i class="fa fa-user fa-fw"></i> {echo $user->name}  <i class="fa fa-caret-down"></i>
             </a>
             <ul class="dropdown-menu dropdown-user">
-                <li><a href="/employer"><i class="fa fa-briefcase fa-fw"></i> Employer</a></li>
                 <li><a href="/admin"><i class="fa fa-gear fa-fw"></i> Dashboard</a></li>
                 <li><a href="/logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a></li>
+                <li class="divider"></li>
+                {foreach $project in $projects}
+                <li><a href="/admin/switchProject/{$project->id}"><i class="fa fa-briefcase fa-fw"></i> {echo $project->name}</a></li>
+                {/foreach}
             </ul>
         </li>
     </ul>
@@ -39,21 +42,12 @@
                 </ul>
             </li>
             <li>
-                <a href="#"><i class="fa fa-newspaper-o fa-fw"></i> NewsLetter<span class="fa arrow"></span></a>
+                <a href="#"><i class="fa fa-black-tie fa-fw"></i> HR<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
-                    <li><a href="/marketing/newsletterCreate">Create</a></li>
-                    <li><a href="/marketing/newsletterManage">Manage</a></li>
+                    <li><a href="/hr/attendance">Create</a></li>
+                    <li><a href="/hr/team">Manage</a></li>
                 </ul>
             </li>
-            <li>
-                <a href="#"><i class="fa fa-support fa-fw"></i> CRM<span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level">
-                    <li><a href="/marketing/crmTemplate">Template</a></li>
-                    <li><a href="/marketing/crmLead">Leads</a></li>
-                    <li><a href="/marketing/crmManage">Manage</a></li>
-                </ul>
-            </li>
-            <li><a href="/marketing/sponsored"><i class="fa fa-bullhorn fa-fw"></i> Sponsored</a></li>
         </ul>
     </div>
 </nav>
