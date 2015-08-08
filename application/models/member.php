@@ -5,7 +5,7 @@
  *
  * @author Faizan Ayubi
  */
-class Member extends Admin {
+class Member extends Shared\Model {
     
     /**
      * @column
