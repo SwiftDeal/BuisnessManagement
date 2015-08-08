@@ -29,9 +29,9 @@ class Admin extends Controller {
 
         if (RequestMethods::post("action") == "login") {
             $user = User::first(array(
-                        "email = ?" => RequestMethods::post("email"),
-                        "password = ?" => sha1(RequestMethods::post("password")),
-                        "validity" => TRUE
+                "email = ?" => RequestMethods::post("email"),
+                "password = ?" => sha1(RequestMethods::post("password")),
+                "validity" => TRUE
             ));
             if ($user) {
                 $members = Member::all(array("user_id = ?" => $user->id));
