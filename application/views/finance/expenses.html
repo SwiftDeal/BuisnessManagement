@@ -28,6 +28,7 @@
                     <th>Id</th>
                     <th>User</th>
                     <th>Amount</th>
+                    <th>Comment</th>
                     <th>Created</th>
                 </thead>
                 <tbody id="results">
@@ -37,6 +38,7 @@
                         <td>{echo $payment->id}</td>
                         <td><a href="/admin/info/user/{$user->id}" target="_blank">{echo $user->name}</a></td>
                         <td>{echo $payment->amount}</td>
+                        <td><small>{echo $payment->comment}</small></td>
                         <td>{echo $payment->created}</td>
                     </tr>
                     {/foreach}
