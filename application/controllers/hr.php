@@ -54,6 +54,19 @@ class HR extends Admin {
     public function work() {
         $this->seo(array("title" => "Work Logs", "view" => $this->getLayoutView()));
         $view = $this->getActionView();
+        
+        if(RequestMethods::post("details")) {
+            $work = new Work(array(
+                "user_id" => $this->user->id,
+                "project_id" => $this->project->id,
+                "details" => RequestMethods::post("details")
+            ));
+            $work->save();
+            $view->set("message", "Saved Successfully");
+        }
+        $works = Work::all(array("user_id = ?" => $this->user->id, "project_id" => $this->project->id));
+        
+        $view->set("works", $works);
     }
     
 }
