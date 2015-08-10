@@ -54,6 +54,17 @@ class HR extends Admin {
     /**
      * @before _secure, changeLayout
      */
+    public function projects() {
+        $this->seo(array("title" => "Manage Projects", "view" => $this->getLayoutView()));
+        $view = $this->getActionView();
+        
+        $projects = Project::all();
+        $view->set("projects", $projects);
+    }
+    
+    /**
+     * @before _secure, changeLayout
+     */
     public function work() {
         $this->seo(array("title" => "Work Logs", "view" => $this->getLayoutView()));
         $view = $this->getActionView();

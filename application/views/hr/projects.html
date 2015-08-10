@@ -1,0 +1,35 @@
+<div id="page-wrapper">
+    <div class="row col-lg-12">
+        <h1 class="page-header text-center">Manage Projects</h1>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-list fa-fw"></i> Projects
+            </div>
+            <table class="table table-striped text-center table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Details</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {foreach $project in $projects}
+                        <tr>
+                            <td>{$project->name}</td>
+                            <td>{$project->details}</td>
+                            <td>
+                                <a href="" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Edit</a>
+                            </td>
+                        </tr>
+                    {/foreach}
+                </tbody>
+            </table>
+            <div class="text-center">
+                {if($count > 10)}
+                <a href="{echo URL}&page={echo $page+1}" class="btn btn-primary">Load More</a>
+                {/if}
+            </div>
+        </div>
+    </div>
+</div>
