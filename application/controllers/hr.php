@@ -46,6 +46,9 @@ class HR extends Admin {
     public function team() {
         $this->seo(array("title" => "Team Members", "view" => $this->getLayoutView()));
         $view = $this->getActionView();
+        
+        $team = Member::all(array("project_id = ?" => $this->project->id));
+        $view->set("team", $team);
     }
     
     /**
